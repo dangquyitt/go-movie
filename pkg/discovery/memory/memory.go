@@ -53,7 +53,7 @@ func (r *Registry) Deregister(ctx context.Context, instanceID InstanceID, servic
 
 // ReportHealthyState is a push mechanism for
 // reporting healthy state to the registry.
-func (r *Registry) ReportHealthyState(instanceID InstanceID, serviceName ServiceName) error {
+func (r *Registry) ReportHealthyState(ctx context.Context, instanceID InstanceID, serviceName ServiceName) error {
 	r.Lock()
 	defer r.Unlock()
 	if _, ok := r.serviceAddrs[serviceName]; !ok {

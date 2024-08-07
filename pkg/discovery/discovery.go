@@ -21,7 +21,7 @@ type Registry interface {
 	ServiceAddresses(ctx context.Context, serviceID string) ([]string, error)
 	// ReportHealthyState is a push mechanism for reporting
 	// healthy state to the registry.
-	ReportHealthyState(instanceID string, serviceName string) error
+	ReportHealthyState(ctx context.Context, instanceID string, serviceName string) error
 }
 
 // ErrNotFound is returned when no service addresses are
