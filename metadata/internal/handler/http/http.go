@@ -21,7 +21,7 @@ func New(business *metadata.Business) *Handler {
 }
 
 // GetMetadata handles GET /metadata requests.
-func (h *Handler) GetMetadata(w http.ResponseWriter, req *http.Request) {
+func (h *Handler) GetMetadataByID(w http.ResponseWriter, req *http.Request) {
 	id := req.FormValue("id")
 	if id == "" {
 		w.WriteHeader(http.StatusBadRequest)
