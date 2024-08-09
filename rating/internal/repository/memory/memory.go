@@ -2,9 +2,9 @@ package memory
 
 import (
 	"context"
+	"github.com/dangquyitt/go-movie/rating/pkg/model"
 
 	"github.com/dangquyitt/go-movie/rating/internal/repository"
-	model "github.com/dangquyitt/go-movie/rating/pkg"
 )
 
 // Repository defines a rating repository.

@@ -3,10 +3,10 @@ package grpc
 import (
 	"context"
 	"errors"
+	"github.com/dangquyitt/go-movie/rating/pkg/model"
 
 	"github.com/dangquyitt/go-movie/gen"
 	"github.com/dangquyitt/go-movie/rating/internal/business/rating"
-	model "github.com/dangquyitt/go-movie/rating/pkg"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

@@ -2,11 +2,11 @@ package grpc
 
 import (
 	"context"
+	"github.com/dangquyitt/go-movie/rating/pkg/model"
 
 	"github.com/dangquyitt/go-movie/gen"
 	"github.com/dangquyitt/go-movie/internal/grpcutil"
 	"github.com/dangquyitt/go-movie/pkg/discovery"
-	model "github.com/dangquyitt/go-movie/rating/pkg"
 )
 
 // Gateway defines an gRPC gateway for a rating service.
