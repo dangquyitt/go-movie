@@ -3,6 +3,7 @@ package rating
 import (
 	"context"
 	"errors"
+
 	"github.com/dangquyitt/go-movie/rating/pkg/model"
 
 	"github.com/dangquyitt/go-movie/rating/internal/repository"
@@ -17,14 +18,19 @@ type ratingRepository interface {
 	Put(ctx context.Context, recordID model.RecordID, recordType model.RecordType, rating *model.Rating) error
 }
 
+type ratingIngester interface {
+	Ingest(ctx context.Context) (chan model.RatingEvent, error)
+}
+
 // Business defines a rating service business.
 type Business struct {
-	repo ratingRepository
+	repo     ratingRepository
+	ingester ratingIngester
 }
 
 // New creates a rating service controller.
-func New(repo ratingRepository) *Business {
-	return &Business{repo}
+func New(repo ratingRepository, ingester ratingIngester) *Business {
+	return &Business{repo: repo, ingester: ingester}
 }
 
 // GetAggregatedRating returns the aggregated rating for a
@@ -46,4 +52,18 @@ func (c *Business) GetAggregatedRating(ctx context.Context, recordID model.Recor
 // PutRating writes a rating for a given record.
 func (c *Business) PutRating(ctx context.Context, recordID model.RecordID, recordType model.RecordType, rating *model.Rating) error {
 	return c.repo.Put(ctx, recordID, recordType, rating)
+}
+
+// StartIngestion starts the ingestion of rating events.
+func (s *Business) StartIngestion(ctx context.Context) error {
+	ch, err := s.ingester.Ingest(ctx)
+	if err != nil {
+		return err
+	}
+	for e := range ch {
+		if err := s.PutRating(ctx, e.RecordID, e.RecordType, &model.Rating{UserID: e.UserID, Value: e.Value}); err != nil {
+			return err
+		}
+	}
+	return nil
 }
