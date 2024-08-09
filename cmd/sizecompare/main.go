@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"github.com/dangquyitt/go-movie/metadata/pkg/model"
 
 	"github.com/dangquyitt/go-movie/gen"
-	model "github.com/dangquyitt/go-movie/metadata/pkg"
 	"github.com/gogo/protobuf/proto"
 )
 

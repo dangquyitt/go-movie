@@ -2,10 +2,10 @@ package grpc
 
 import (
 	"context"
+	model2 "github.com/dangquyitt/go-movie/metadata/pkg/model"
 
 	"github.com/dangquyitt/go-movie/gen"
 	"github.com/dangquyitt/go-movie/internal/grpcutil"
-	model "github.com/dangquyitt/go-movie/metadata/pkg"
 	"github.com/dangquyitt/go-movie/pkg/discovery"
 )
 
@@ -20,7 +20,7 @@ func New(registry discovery.Registry) *Gateway {
 }
 
 // Get returns movie metadata by a movie id.
-func (g *Gateway) Get(ctx context.Context, id string) (*model.Metadata, error) {
+func (g *Gateway) Get(ctx context.Context, id string) (*model2.Metadata, error) {
 	conn, err := grpcutil.ServiceConnection(ctx, "metadata", g.registry)
 	if err != nil {
 		return nil, err
@@ -31,5 +31,5 @@ func (g *Gateway) Get(ctx context.Context, id string) (*model.Metadata, error) {
 	if err != nil {
 		return nil, err
 	}
-	return model.MetadataFromProto(resp.Metadata), nil
+	return model2.MetadataFromProto(resp.Metadata), nil
 }

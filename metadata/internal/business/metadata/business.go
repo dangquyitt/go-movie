@@ -3,9 +3,9 @@ package metadata
 import (
 	"context"
 	"errors"
+	"github.com/dangquyitt/go-movie/metadata/pkg/model"
 
 	"github.com/dangquyitt/go-movie/metadata/internal/repository"
-	model "github.com/dangquyitt/go-movie/metadata/pkg"
 )
 
 // ErrNotFound is returned when a requested record is not // found.

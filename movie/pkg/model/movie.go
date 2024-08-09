@@ -1,6 +1,8 @@
 package model
 
-import model "github.com/dangquyitt/go-movie/metadata/pkg"
+import (
+	"github.com/dangquyitt/go-movie/metadata/pkg/model"
+)
 
 // MovieDetails includes movie metadata its aggregated
 // rating.

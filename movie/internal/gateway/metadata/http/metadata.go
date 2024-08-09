@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/dangquyitt/go-movie/metadata/pkg/model"
 	"log"
 	"net/http"
 
-	model "github.com/dangquyitt/go-movie/metadata/pkg"
 	"github.com/dangquyitt/go-movie/movie/internal/gateway"
 	"github.com/dangquyitt/go-movie/pkg/discovery"
 	"golang.org/x/exp/rand"

@@ -3,12 +3,12 @@ package http
 import (
 	"encoding/json"
 	"errors"
+	"github.com/dangquyitt/go-movie/rating/pkg/model"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/dangquyitt/go-movie/rating/internal/business/rating"
-	model "github.com/dangquyitt/go-movie/rating/pkg"
 )
 
 // Handler defines a rating service controller.

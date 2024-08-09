@@ -3,9 +3,9 @@ package rating
 import (
 	"context"
 	"errors"
+	"github.com/dangquyitt/go-movie/rating/pkg/model"
 
 	"github.com/dangquyitt/go-movie/rating/internal/repository"
-	model "github.com/dangquyitt/go-movie/rating/pkg"
 )
 
 // ErrNotFound is returned when no ratings are found for a

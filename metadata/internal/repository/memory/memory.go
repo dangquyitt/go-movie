@@ -2,10 +2,10 @@ package memory
 
 import (
 	"context"
+	"github.com/dangquyitt/go-movie/metadata/pkg/model"
 	"sync"
 
 	"github.com/dangquyitt/go-movie/metadata/internal/repository"
-	model "github.com/dangquyitt/go-movie/metadata/pkg"
 )
 
 // Repository defines a memory movie metadata repository.
