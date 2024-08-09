@@ -8,3 +8,6 @@ metadata-service:
 
 rating-service:
 	go run rating/cmd/main.go
+
+proto:
+	protoc -I=api --go_out=. --go-grpc_out=. movie.proto 

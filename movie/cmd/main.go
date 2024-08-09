@@ -5,15 +5,18 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net/http"
+	"net"
 	"time"
 
+	"github.com/dangquyitt/go-movie/gen"
 	"github.com/dangquyitt/go-movie/movie/internal/business/movie"
 	metadatagateway "github.com/dangquyitt/go-movie/movie/internal/gateway/metadata/http"
 	ratinggateway "github.com/dangquyitt/go-movie/movie/internal/gateway/rating/http"
-	httphandler "github.com/dangquyitt/go-movie/movie/internal/handler/http"
+	grpchandler "github.com/dangquyitt/go-movie/movie/internal/handler/grpc"
 	"github.com/dangquyitt/go-movie/pkg/discovery"
 	"github.com/dangquyitt/go-movie/pkg/discovery/consul"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 const serviceName = "movie"
@@ -43,10 +46,16 @@ func main() {
 	defer registry.Deregister(ctx, instanceID, serviceName)
 	metadataGateway := metadatagateway.New(registry)
 	ratingGateway := ratinggateway.New(registry)
-	svc := movie.New(ratingGateway, metadataGateway)
-	h := httphandler.New(svc)
-	http.Handle("/movie", http.HandlerFunc(h.GetMovieDetails))
-	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil); err != nil {
+	biz := movie.New(ratingGateway, metadataGateway)
+	h := grpchandler.New(biz)
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	srv := grpc.NewServer()
+	reflection.Register(srv)
+	gen.RegisterMovieServiceServer(srv, h)
+	if err := srv.Serve(lis); err != nil {
 		panic(err)
 	}
 }
