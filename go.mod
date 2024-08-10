@@ -3,6 +3,8 @@ module github.com/dangquyitt/go-movie
 go 1.22
 
 require (
+	github.com/confluentinc/confluent-kafka-go v1.9.2
+	github.com/go-sql-driver/mysql v1.8.1
 	github.com/gogo/protobuf v1.3.2
 	github.com/hashicorp/consul/api v1.29.1
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63
@@ -11,8 +13,8 @@ require (
 )
 
 require (
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/armon/go-metrics v0.4.1 // indirect
-	github.com/confluentinc/confluent-kafka-go v1.9.2 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
